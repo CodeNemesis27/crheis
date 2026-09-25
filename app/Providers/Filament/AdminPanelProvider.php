@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\AnalyticsOverview;
+use Caresome\FilamentAuthDesigner\AuthDesignerPlugin;
+use Caresome\FilamentAuthDesigner\Enums\MediaPosition;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,17 +33,32 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->registration()
             ->brandName('NMIS RTOC 11')
+            ->brandLogo('/images/ezracare_logo.png')
+            ->brandLogoHeight('40px')
+            ->font('Onest')
             ->colors([
                 'primary' => ShadcnColor::Default,
                 'secondary' => Color::Purple,
             ])
-            ->plugin(FilamentMobilePresetPlugin::make())
+            ->plugins([
+                FilamentMobilePresetPlugin::make(),
+                AuthDesignerPlugin::make()
+                    ->defaults(
+                        fn($config) => $config
+                            ->media(asset('images/auth_background_image.png'))
+                            ->mediaPosition(MediaPosition::Left)
+                            ->mediaSize('65%')
+                    )
+                    ->login()
+                    ->registration()
+                    ->passwordReset()
+            ])
             ->sidebarWidth('18rem')
             ->collapsedSidebarWidth('5rem')
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(true)
-            ->font('Albert Sans')
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label('Regulated Entities'),

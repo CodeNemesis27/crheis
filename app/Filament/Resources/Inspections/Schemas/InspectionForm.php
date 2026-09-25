@@ -5,10 +5,14 @@ namespace App\Filament\Resources\Inspections\Schemas;
 use App\Models\MeatEstablishment;
 use App\Models\MtvOperator;
 use App\Models\MtvVehicle;
+use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
@@ -133,7 +137,55 @@ class InspectionForm
                                     ->helperText('Leave blank if the result was a clean pass with no action needed.')
                                     ->columnSpanFull(),
                             ]),
+
+
                     ]),
+
+                Group::make()
+                    ->schema([
+                        Section::make('Meat Quality Inspection')
+                            ->description('Commodities examined during this inspection.')
+                            ->components([
+                                Repeater::make('commodities')
+                                    ->relationship()
+                                    ->schema([
+                                        Hidden::make('commodity_type'),
+                                        TextInput::make('condition')
+                                            ->maxLength(255)
+                                            ->placeholder('e.g. Fresh, Spoiled, Contaminated'),
+                                        TextInput::make('quantity_kg')
+                                            ->label('Quantity (kg)')
+                                            ->numeric()->suffix('kg')
+                                            ->placeholder('e.g. 150'),
+                                        Select::make('origin_establishment_id')
+                                            ->label('Origin (Slaughterhouse)')
+                                            ->relationship('originEstablishment', 'business_name', fn($query) => $query->where('establishment_type', 'slaughterhouse'))
+                                            ->searchable()->preload()
+                                            ->placeholder('Select origin slaughterhouse'),
+                                        Checkbox::make('mic')
+                                            ->label('MIC (Meat Inspection Certificate)')
+                                            ->helperText('Certificate presented?'),
+                                        Textarea::make('mic_remarks')
+                                            ->label('MIC Remarks')
+                                            ->rows(2)
+                                            ->placeholder('Notes on certificate status...')
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->columns(4)
+                                    ->itemLabel(fn(array $state): ?string => $state['commodity_type'] ?? null)
+                                    ->collapsible()
+                                    ->addable(false)
+                                    ->deletable(false)
+                                    ->reorderableWithDragAndDrop(false)
+                                    ->default([
+                                        ['commodity_type' => 'Beef'],
+                                        ['commodity_type' => 'Pork'],
+                                        ['commodity_type' => 'Chicken'],
+                                        ['commodity_type' => 'Others'],
+                                    ])
+                                    ->columnSpanFull(),
+                            ]),
+                    ])->columnSpanFull()
 
             ])->columns(2);
     }

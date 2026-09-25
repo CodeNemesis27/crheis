@@ -62,6 +62,11 @@ class Inspection extends Model
         };
     }
 
+    public function commodities(): HasMany
+    {
+        return $this->hasMany(InspectionCommodity::class);
+    }
+
     // Documents attach via polymorphic morphMany('documentable') once the
     // Document model exists.
 }

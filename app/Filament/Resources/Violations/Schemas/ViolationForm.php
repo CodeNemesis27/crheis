@@ -163,6 +163,7 @@ class ViolationForm
                             ->description('Narrative account of what happened, for the record.')
                             ->components([
                                 FileUpload::make('attachment')
+                                    ->disk('r2')
                                     ->rules([new AntivirusFileRule()]),
                                 Textarea::make('description')
                                     ->required()

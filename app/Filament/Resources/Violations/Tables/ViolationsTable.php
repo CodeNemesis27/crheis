@@ -18,6 +18,7 @@ class ViolationsTable
         return $table
             ->modifyQueryUsing(fn(Builder $query) => $query->with(['subject', 'violationType', 'reportedBy', 'office']))
             ->columns([
+                TextColumn::make('id'),
                 TextColumn::make('violation_number')->searchable()->sortable(),
                 TextColumn::make('subject_label')->label('Entity'),
                 TextColumn::make('violationType.title')->label('Violation type')->wrap(),

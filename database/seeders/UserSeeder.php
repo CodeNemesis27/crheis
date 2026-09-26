@@ -14,8 +14,7 @@ class UserSeeder extends Seeder
 
         $users = [
             // System Admin
-            ['name' => 'Richard Sombrio', 'email' => 'richard.sombrio27@gmail.com', 'employee_id' => 'NMIS-2024-05403', 'office_code' => 'NMIS-CO', 'role' => 'System Admin', 'position' => 'IT Systems Administrator'],
-            ['name' => 'Ramon Villanueva', 'email' => 'ramon.villanueva@nmis.gov.ph', 'employee_id' => 'NMIS-2026-0001', 'office_code' => 'NMIS-CO', 'role' => 'System Admin', 'position' => 'IT Systems Administrator'],
+            ['name' => 'Richard Sombrio', 'email' => 'richard.sombrio27@gmail.com', 'employee_id' => 'NMIS-2026-0001', 'office_code' => 'NMIS-CO', 'role' => 'System Admin', 'position' => 'IT Systems Administrator'],
 
             // NMIS Central (3)
             ['name' => 'Corazon Bautista', 'email' => 'corazon.bautista@nmis.gov.ph', 'employee_id' => 'NMIS-2026-0002', 'office_code' => 'NMIS-CO', 'role' => 'NMIS Central', 'position' => 'Chief, Enforcement and Food Defense Division'],

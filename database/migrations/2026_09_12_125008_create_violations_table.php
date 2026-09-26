@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('date_reported');
             $table->enum('severity', ['Minor', 'Major', 'Critical']);
             $table->text('description');
+            $table->text('attachment')->nullable();
             $table->enum('status', [
                 'Open',
                 'Under Investigation',

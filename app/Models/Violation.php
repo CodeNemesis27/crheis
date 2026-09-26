@@ -19,6 +19,7 @@ class Violation extends Model
         'date_reported',
         'severity',
         'description',
+        'attachment',
         'status',
         'reported_by',
         'office_id',

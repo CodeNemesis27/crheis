@@ -6,6 +6,7 @@ use App\Models\MeatEstablishment;
 use App\Models\MtvOperator;
 use App\Models\MtvVehicle;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -15,6 +16,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
+use JohnRivera7\FilamentAntivirus\Rules\AntivirusFileRule;
 
 class ViolationForm
 {
@@ -160,6 +162,9 @@ class ViolationForm
                         Section::make('Description')
                             ->description('Narrative account of what happened, for the record.')
                             ->components([
+                                FileUpload::make('attachment')
+                                    ->disk('public')
+                                    ->rules([new AntivirusFileRule()]),
                                 Textarea::make('description')
                                     ->required()
                                     ->rows(3)

@@ -21,7 +21,6 @@ class AnalyticsOverview extends BaseDashboard
         return [
             ComplianceStatsOverview::class,
             EnforcementCaseStatusChart::class,
-
         ];
     }
 }

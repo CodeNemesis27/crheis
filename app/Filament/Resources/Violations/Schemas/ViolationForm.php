@@ -164,7 +164,7 @@ class ViolationForm
                             ->components([
                                 FileUpload::make('attachment')
                                     ->disk('r2')
-                                    ->rules([new AntivirusFileRule()]),
+                                    ->preserveFilenames(),
                                 Textarea::make('description')
                                     ->required()
                                     ->rows(3)

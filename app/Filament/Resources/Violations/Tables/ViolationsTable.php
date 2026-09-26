@@ -18,7 +18,8 @@ class ViolationsTable
         return $table
             ->modifyQueryUsing(fn(Builder $query) => $query->with(['subject', 'violationType', 'reportedBy', 'office']))
             ->columns([
-                TextColumn::make('id'),
+                TextColumn::make('id')
+                    ->sortable(),
                 TextColumn::make('violation_number')->searchable()->sortable(),
                 TextColumn::make('subject_label')->label('Entity'),
                 TextColumn::make('violationType.title')->label('Violation type')->wrap(),
@@ -39,8 +40,9 @@ class ViolationsTable
                     ]),
                 TextColumn::make('date_committed')->date()->sortable(),
                 TextColumn::make('office.name')->label('Office')->toggleable(),
-                TextColumn::make('created_at')->dateTime()->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 SelectFilter::make('violation_type_id')->label('Violation type')

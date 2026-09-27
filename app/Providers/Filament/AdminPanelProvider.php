@@ -26,6 +26,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use JohnRivera7\FilamentAntivirus\FilamentAntivirusPlugin;
 use Openplain\FilamentShadcnTheme\Color as ShadcnColor;
+use Tapp\FilamentAuthenticationLog\FilamentAuthenticationLogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -58,7 +59,8 @@ class AdminPanelProvider extends PanelProvider
                     ->registration()
                     ->passwordReset(),
                 FilamentAntivirusPlugin::make()
-                    ->navigationGroup('System Setup')
+                    ->navigationGroup('System Setup'),
+                FilamentAuthenticationLogPlugin::make()
             ])
             ->sidebarWidth('18rem')
             ->collapsedSidebarWidth('5rem')

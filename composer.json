@@ -14,7 +14,9 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "3.0",
-        "openplain/filament-shadcn-theme": "^1.1"
+        "openplain/filament-shadcn-theme": "^1.1",
+        "rappasoft/laravel-authentication-log": "^6.1",
+        "tapp/filament-authentication-log": "~5.0"
     },
     "require-dev": {
         "laravel/pail": "^1.2.2",
